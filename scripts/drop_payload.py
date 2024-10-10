@@ -10,8 +10,26 @@ SERVO_PIN = 12
 def set_servo_duty(angle):
     #duty_cycle = (angle / 18.0) + 2.5 # Convert angle to duty cycle
     servo.ChangeDutyCycle(angle)
-    time.sleep(3) # Allow time for the servo to move
-    servo.ChangeDutyCycle(7.5) # Stop sending signal to avoid jitter
+    time.sleep(1) # Allow time for the servo to move
+    servo.ChangeDutyCycle(angle)
+    time.sleep(0.5) # Allow time for the servo to move    
+    servo.ChangeDutyCycle(angle)
+    time.sleep(0.5) # Allow time for the servo to move
+    servo.ChangeDutyCycle(angle)
+    time.sleep(0.5) # Allow time for the servo to move    
+    servo.ChangeDutyCycle(angle)
+    time.sleep(0.5) # Allow time for the servo to move
+    servo.ChangeDutyCycle(0)
+    time.sleep(1) # Allow time for the servo to move
+    servo.ChangeDutyCycle(angle)
+    time.sleep(0.5) # Allow time for the servo to move    
+    servo.ChangeDutyCycle(angle)
+    time.sleep(0.5) # Allow time for the servo to move
+    servo.ChangeDutyCycle(angle)
+    time.sleep(0.5) # Allow time for the servo to move    
+    servo.ChangeDutyCycle(angle)
+    time.sleep(0.5) # Allow time for the servo to move
+    servo.ChangeDutyCycle(7.5)
     time.sleep(1) # Allow time for the servo to move
     servo.ChangeDutyCycle(0) # Stop sending signal to avoid jitter
 
@@ -20,10 +38,10 @@ def payload_callback(msg):
     rospy.loginfo("callback called")
     if msg.data == "drop_epipen":
         rospy.loginfo("Deploying EpiPen for human")
-        set_servo_duty(2.5)
+        set_servo_duty(12.5)
     elif msg.data == "drop_gps":
         rospy.loginfo("Deploying GPS for backpack")
-        set_servo_duty(12.5)
+        set_servo_duty(2.5)
     elif msg.data == "drop_drone":
         rospy.loginfo("Deploying square payload for drone")
         set_servo_duty(11.7)
@@ -49,6 +67,9 @@ if __name__ == "__main__":
         GPIO.setup(SERVO_PIN, GPIO.OUT)
         servo = GPIO.PWM(SERVO_PIN, 50) # 50Hz frequency
         servo.start(0)
+
+        # set servo to middle point added wk11
+        set_servo_duty(7.5)
 
         # Subscribe to the payload deployment topic
         payload_deployment = rospy.Subscriber('/payload_deployment', String, payload_callback)

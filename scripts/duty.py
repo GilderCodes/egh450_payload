@@ -16,12 +16,22 @@ try:
         if 2.5 <= duty_cycle <= 12.5:
             servo.ChangeDutyCycle(duty_cycle)                 
             time.sleep(1) # Allow time for the servo to move
+            servo.ChangeDutyCycle(duty_cycle)                 
+            time.sleep(0.5) # Allow time for the servo to move
+            servo.ChangeDutyCycle(duty_cycle)                 
+            time.sleep(0.5) # Allow time for the servo to move
+            servo.ChangeDutyCycle(duty_cycle)                 
+            time.sleep(0.5) # Allow time for the servo to move
+            servo.ChangeDutyCycle(duty_cycle)                 
+            time.sleep(0.5) # Allow time for the servo to move
            # servo.ChangeDutyCycle(duty_cycle-0.5)
             #time.sleep(0.2) # Allow time for the servo to move
            # servo.ChangeDutyCycle(duty_cycle+0.5)
            # time.sleep(0.2) # Allow time for the servo to move
           #  servo.ChangeDutyCycle(7.5)
            # time.sleep(1) # Allow time for the servo to move
+            servo.ChangeDutyCycle(7.5)                 
+            time.sleep(1) # Allow time for the servo to move
             servo.ChangeDutyCycle(0) # Stop sending signal to avoid jitter
         else:
             print("Please enter a duty cycle between 2.5 and 12.5")
